@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aulaviva-prod
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/KulkatPOP/Equipo-AulaViva-gitops.git
+    targetRevision: main
+    path: overlays/prod
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: aulaviva-prod
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
